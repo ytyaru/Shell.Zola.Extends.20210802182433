@@ -30,7 +30,7 @@
 </h1>
 {%- if page and page.description %}<p>{{ page.description | safe }}</p>
 {%- elif section and section.description %}<p>{{ section.description | safe }}</p>
-{%- elif config and config.description %}<p>{{ config.description | safe }}</p>
+{%- elif not page and not section and config and config.description %}<p>{{ config.description | safe }}</p>
 {%- else %}{% endif -%}
 {% block content %}{% endblock %}
 </main>
