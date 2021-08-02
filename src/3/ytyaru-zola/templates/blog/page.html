@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{%- block description %}{% endblock desctiption -%}
+
+{%- block content %}
+<article>{{ page.content | safe }}</article>
+<aside>
+<nav class="pagination">
+{% if page.earlier %}<a class="previous" href="{{ page.earlier.permalink }}">‹ {{ page.earlier.title }}</a>{% endif %}
+{% if page.earlier and page.later %}　{% endif %}
+{% if page.later %}<a class="next" href="{{ page.later.permalink }}">{{ page.later.title}} ›</a>{% endif %}
+</nav></aside>
+{% endblock -%}
+

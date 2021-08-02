@@ -1,0 +1,44 @@
+{% import "macro/header.html" as header %}
+{% import "macro/footer.html" as footer %}
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>
+{%- if page and page.title %}{{ page.title }} | {% endif -%}
+{%- if section and section.title %}{{ section.title }} | {% endif -%}
+{%- if config and config.title %}{{ config.title }}{% endif -%}
+</title>
+{%- if page and page.description %}{% set description = page.description %}
+{%- elif section and section.description %}{% set description = section.description %}
+{%- elif config and config.description %}{% set description = config.description %}
+{%- else %}{% endif %}
+{% if description %}<meta name="description" content="{{ description }}">{% endif %}
+{% if config.extra.author %}<meta name="author" content="{{ config.extra.author }}">{% endif %}
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/css/mobile.css" type="text/css" media="screen and (max-width: 899px)">
+<link rel="stylesheet" href="/css/pc.css" type="text/css" media="screen and (min-width: 900px)">
+<link rel="shortcut icon" href="">
+</head>
+<body>
+{{ header::menu(items=["archive","author","about","blog"]) }}
+<main>
+{% block title %}
+<h1>
+{%- if page and page.title %}{{ page.title }}
+{%- elif section and section.title %}{{ section.title }}
+{%- elif config and config.title %}{{ config.title }}
+{%- else %}{% endif -%}
+</h1>
+{% endblock title %}
+{% block description %}
+{%- if page and page.description %}<p>{{ page.description | safe }}</p>
+{%- elif section and section.description %}<p>{{ section.description | safe }}</p>
+{%- elif not page and not section and config and config.description %}<p>{{ config.description | safe }}</p>
+{%- else %}{% endif -%}
+{% endblock description %}
+{% block content %}{% endblock %}
+</main>
+{{ footer::footer() }}
+</body>
+</html>
